@@ -8,7 +8,9 @@ const $ccNum = $("#cc-num");
 function validateEmail(address) {
     const $mail = $("label[for='mail']");
     const filter = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    $("label[for='mailError']").remove();
     if (filter.test(address) === false) {
+        validEmail = false;
         $mail.focus().css("color", "red");
         errorMessage($mail, "mailError", "Please enter a valid email address.");
     } else {
@@ -19,7 +21,6 @@ function validateEmail(address) {
 
 // real-time validation for email address
 $("#mail").keyup(function () {
-    $("label[for='mailError']").remove();
     validateEmail($("#mail").val());
 });
 
@@ -154,6 +155,13 @@ $($("[type='submit']")).click(function (submit) {
     if ($("input:checked").length === 0) {
         submit.preventDefault();
         $(".error").css("color", "red").text("Please select at least one activity");
+    }
+    if ($("[value='select_method']").is(":selected")) {
+        submit.preventDefault();
+        $("label[for='payment']").css("color", "red");
+        errorMessage($("label[for='payment']"), "selectError", "Please choose a method of payment.")
+    } else {
+        $("label[for='payment']").css("color", "black");
     }
     if ($("[value='credit card']").is(":selected")) {
         if ((!$.isNumeric($ccNum.val())) || ($ccNum.val().length < 13) || ($ccNum.val().length > 16)) {
