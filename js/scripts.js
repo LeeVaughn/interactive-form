@@ -167,7 +167,10 @@ $($("[type='submit']")).click(function (submit) {
         if ((!$.isNumeric($ccNum.val())) || ($ccNum.val().length < 13) || ($ccNum.val().length > 16)) {
             submit.preventDefault();
             $("label[for='cc-num']").focus().css("color", "red");
-            if (!$.isNumeric($ccNum.val())) {
+            if ($ccNum.val() === "") {
+                errorMessage($("label[for='cc-num']"), "numError", "Please enter a credit card number.")
+            }
+            if (!$.isNumeric($ccNum.val()) && ($ccNum.val().length > 0)) {
                 errorMessage($("label[for='cc-num']"), "numError", "Should contain only numbers.")
             }
             if (($.isNumeric($ccNum.val())) && ($ccNum.val().length < 13) || ($ccNum.val().length > 16)) {
