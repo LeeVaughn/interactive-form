@@ -14,6 +14,9 @@ This is my third project in the Treehouse Full Stack JavaScript Techdegree progr
 * Errors indicate improper entries.
 * All form fields and payment information is displayed with JavaScript is disabled.
 
+## Future Improvements
+* Add more real-time error detection for required fields.
+
 ## Links
 * Project homepage: https://leevaughn.github.io/interactive-form/
 * Repository: https://github.com/LeeVaughn/interactive-form
