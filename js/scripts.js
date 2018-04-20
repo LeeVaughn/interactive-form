@@ -144,6 +144,8 @@ $($("[type='submit']")).click(function (submit) {
         submit.preventDefault();
         $name.focus().css("color", "red");
         errorMessage($name, "nameError", "Please enter a name");
+    } else {
+        $name.css("color", "black");
     }
     if (validEmail === false) {
         submit.preventDefault();
@@ -163,16 +165,22 @@ $($("[type='submit']")).click(function (submit) {
             if (($.isNumeric($ccNum.val())) && ($ccNum.val().length < 13) || ($ccNum.val().length > 16)) {
                 errorMessage($("label[for='cc-num']"), "lengthError", "Should be between 13 and 16 digits.")
             }
+        } else {
+            $("label[for='cc-num']").css("color", "black");
         }
         if ((!$.isNumeric($("#zip").val())) || ($("#zip").val().length !== 5)) {
             submit.preventDefault();
             $("label[for='zip']").focus().css("color", "red");
             errorMessage($("label[for='zip']"), "zipError", "Invalid Zip Code");
+        } else {
+            $("label[for='zip']").css("color", "black");
         }
         if ((!$.isNumeric($("#cvv").val())) || ($("#cvv").val().length !== 3)) {
             submit.preventDefault();
             $("label[for='cvv']").focus().css("color", "red");
             errorMessage($("label[for='cvv']"), "cvvError", "Invalid CVV Code");
+        } else {
+            $("label[for='cvv']").css("color", "black");
         }
     }
 });
