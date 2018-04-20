@@ -15,7 +15,7 @@ This is my third project in the Treehouse Full Stack JavaScript Techdegree progr
 * All form fields and payment information is displayed with JavaScript is disabled.
 
 ## Links
-* Project homepage: coming soon!
+* Project homepage: https://leevaughn.github.io/interactive-form/
 * Repository: https://github.com/LeeVaughn/interactive-form
 
 ## Author
