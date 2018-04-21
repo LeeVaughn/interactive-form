@@ -16,6 +16,7 @@ This is my third project in the Treehouse Full Stack JavaScript Techdegree progr
 
 ## Future Improvements
 * Add more real-time error detection for required fields.
+* Add validation to shirt selection section.
 
 ## Links
 * Project homepage: https://leevaughn.github.io/interactive-form/
