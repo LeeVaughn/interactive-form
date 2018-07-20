@@ -64,7 +64,7 @@ $($activities).change(function () {
         totalCost += cost;
 
         if (totalCost > 0) {
-            $(".total").text("Your current total is $" + totalCost);
+            $(".total").text(`Your current total is $${totalCost}`);
         } else {
             $(".total").empty();
         }
@@ -134,8 +134,8 @@ $($("#payment")).change(function () {
 
 // creates and appends and error message for invalid submissions
 function errorMessage(loc, className, msg) {
-    loc.append("<label for=" + className + ">" + msg + "</label>");
-    $("label[for=" + className + "]").css("backgroundColor", "red").fadeOut(8000);
+    loc.append(`<label for="${className}">${msg}</label>`);
+    $(`label[for="${className}"]`).css("backgroundColor", "red").fadeOut(8000);
 }
 
 // validates user input when register button is clicked
