@@ -76,28 +76,28 @@ $($activities).change(function () {
         currentCost(200);
     }
     if ($("[name='js-frameworks']").is(":checked")) {
-        $("[name='express']").prop("disabled", true);
+        $("[name='express']").prop("disabled", true).parent().css("text-decoration", "line-through");
         currentCost(100);
     } else {
-        $("[name='express']").prop("disabled", false);
+        $("[name='express']").prop("disabled", false).parent().css("text-decoration", "");
     }
     if ($("[name='js-libs']").is(":checked")) {
-        $("[name='node']").prop("disabled", true);
+        $("[name='node']").prop("disabled", true).parent().css("text-decoration", "line-through");
         currentCost(100);
     } else {
-        $("[name='node']").prop("disabled", false);
+        $("[name='node']").prop("disabled", false).parent().css("text-decoration", "");
     }
     if ($("[name='express']").is(":checked")) {
-        $("[name='js-frameworks']").prop("disabled", true);
+        $("[name='js-frameworks']").prop("disabled", true).parent().css("text-decoration", "line-through");
         currentCost(100);
     } else {
-        $("[name='js-frameworks']").prop("disabled", false);
+        $("[name='js-frameworks']").prop("disabled", false).parent().css("text-decoration", "");
     }
     if ($("[name='node']").is(":checked")) {
-        $("[name='js-libs']").prop("disabled", true);
+        $("[name='js-libs']").prop("disabled", true).parent().css("text-decoration", "line-through");
         currentCost(100);
     } else {
-        $("[name='js-libs']").prop("disabled", false);
+        $("[name='js-libs']").prop("disabled", false).parent().css("text-decoration", "");
     }
     if ($("[name='build-tools']").is(":checked")) {
         currentCost(100);
@@ -139,7 +139,7 @@ function errorMessage(loc, className, msg) {
 }
 
 // validates user input when register button is clicked
-// prompts users if fields are not filled out or fill out incorrectly
+// prompts users if fields are not properly filled out
 $($("[type='submit']")).click(function (submit) {
     if ($("#name").val() === "") {
         submit.preventDefault();
@@ -203,7 +203,7 @@ $name.focus();
 $("#other-title").hide();
 // hides color dropdown in shirt fieldset by default
 $color.hide()
-// hides paypall and bitcoin payment info by default
+// hides paypal and bitcoin payment info by default
 $("#paypal").hide();
 $("#bitcoin").hide();
 
@@ -213,4 +213,4 @@ $("[value='credit card']").prop("selected", true);
 // will be used to display activity total
 $activities.append("<div class='total'></div>");
 // will be used to display error message when no activities are selected
-$activities.prepend("<div class='error'></div>");
+$activities.prepend("<p class='error'></p>");
