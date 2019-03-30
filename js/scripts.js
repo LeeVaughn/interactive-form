@@ -1,8 +1,21 @@
 const $name = $("label[for='name']");
+let validName = false;
 let validEmail = false;
 const $color = $("#colors-js-puns");
 const $activities = $(".activities");
 const $ccNum = $("#cc-num");
+
+// tests if name is valid
+function validateName(name) {
+    if (name === "") {
+        validName = false;
+        $name.focus().css("color", "red");
+        errorMessage($name, "nameError", "Please enter a name");
+    } else {
+        validName = true;
+        $name.css("color", "black");
+    }
+}
 
 // tests if email is valid
 function validateEmail(address) {
@@ -18,6 +31,11 @@ function validateEmail(address) {
         $mail.css("color", "black");
     }
 }
+
+// real-time validation for name address
+$("#name").keyup(function () {
+    validateName($("#name").val());
+});
 
 // real-time validation for email address
 $("#mail").keyup(function () {
@@ -141,12 +159,9 @@ function errorMessage(loc, className, msg) {
 // validates user input when register button is clicked
 // prompts users if fields are not properly filled out
 $($("[type='submit']")).click(function (submit) {
-    if ($("#name").val() === "") {
+    if (validName === false) {
         submit.preventDefault();
-        $name.focus().css("color", "red");
-        errorMessage($name, "nameError", "Please enter a name");
-    } else {
-        $name.css("color", "black");
+        validateName($("#name").val());
     }
     if (validEmail === false) {
         submit.preventDefault();
