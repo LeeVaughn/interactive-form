@@ -51,8 +51,7 @@ $("#title").change(function () {
     }
 });
 
-// shows appropriate color choices based on which design in selected
-// hides unavailable color choices
+// shows appropriate color choices based on which design in selected and hides unavailable color choices
 $($("#design")).change(function () {
     const $jsPuns = $(".jsPuns");
     const $heartJS = $(".heartJS");
@@ -88,8 +87,7 @@ $($activities).change(function () {
         }
     }
 
-    // disables overlapping activites based on user choices
-    // and calculates cost of selected activities 
+    // disables overlapping activites based on user choices and calculates cost of selected activities 
     if ($("[name='all']").is(":checked")) {
         currentCost(200);
     }
@@ -131,8 +129,7 @@ $($activities).change(function () {
     $(".error").empty();
 });
 
-// shows the appropriate payment info based on which option is selected
-// hides other payment info
+// shows the appropriate payment info based on which option is selected and hides other payment info
 $($("#payment")).change(function () {
     $("#credit-card").hide();
     $("#paypal").hide();
@@ -156,8 +153,7 @@ function errorMessage(loc, className, msg) {
     $(`label[for="${className}"]`).css("backgroundColor", "red").fadeOut(8000);
 }
 
-// validates user input when register button is clicked
-// prompts users if fields are not properly filled out
+// validates user inputs when register button is clicked
 $($("[type='submit']")).click(function (submit) {
     if (validName === false) {
         submit.preventDefault();
