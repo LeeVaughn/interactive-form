@@ -1,6 +1,7 @@
 const $name = $("label[for='name']");
 let validName = false;
 let validEmail = false;
+let validNum = false;
 const $color = $("#colors-js-puns");
 const $activities = $(".activities");
 const $ccNum = $("#cc-num");
@@ -32,6 +33,35 @@ function validateEmail(address) {
     }
 }
 
+// tests if credit card number is valid
+function validateNum(num) {
+    $("label[for='numError']").remove();
+    if (num === "") {
+        validNum = false;
+        $("label[for='cc-num']").focus().css("color", "red");
+        errorMessage($("label[for='cc-num']"), "numError", "Please enter a credit card number.")
+    }
+    if (!$.isNumeric(num) && (num.length > 0)) {
+        validNum = false;
+        $("label[for='cc-num']").focus().css("color", "red");
+        errorMessage($("label[for='cc-num']"), "numError", "Should contain only numbers.")
+    }
+    if (($.isNumeric(num)) && (num.length < 13) || (num.length > 16)) {
+        validNum = false;
+        $("label[for='cc-num']").focus().css("color", "red");
+        errorMessage($("label[for='cc-num']"), "numError", "Should be between 13 and 16 digits.")
+    }
+    else {
+        $("label[for='cc-num']").css("color", "black");
+    }
+}
+
+// creates and appends and error message for invalid submissions
+function errorMessage(loc, className, msg) {
+    loc.append(`<label for="${className}">${msg}</label>`);
+    $(`label[for="${className}"]`).css("backgroundColor", "red").fadeOut(8000);
+}
+
 // real-time validation for name address
 $("#name").keyup(function () {
     validateName($("#name").val());
@@ -40,6 +70,11 @@ $("#name").keyup(function () {
 // real-time validation for email address
 $("#mail").keyup(function () {
     validateEmail($("#mail").val());
+});
+
+// real-time validation for credit card number
+$("#cc-num").keyup(function () {
+    validateNum($("#cc-num").val());
 });
 
 // shows text input if the user selects "other" from the Job Role dropdown
@@ -146,12 +181,6 @@ $($("#payment")).change(function () {
         $("#bitcoin").show();
     }
 });
-
-// creates and appends and error message for invalid submissions
-function errorMessage(loc, className, msg) {
-    loc.append(`<label for="${className}">${msg}</label>`);
-    $(`label[for="${className}"]`).css("backgroundColor", "red").fadeOut(8000);
-}
 
 // validates user inputs when register button is clicked
 $($("[type='submit']")).click(function (submit) {
