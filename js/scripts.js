@@ -8,7 +8,7 @@ const $color = $("#colors-js-puns");
 const $activities = $(".activities");
 const $ccNum = $("#cc-num");
 
-// tests if name is valid
+// tests if name is valid and displays errors if it is not
 function validateName(name) {
     if (name === "") {
         validName = false;
@@ -20,7 +20,7 @@ function validateName(name) {
     }
 }
 
-// tests if email is valid
+// tests if email is valid and displays errors if it is not
 function validateEmail(address) {
     const $mail = $("label[for='mail']");
     const filter = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -35,7 +35,7 @@ function validateEmail(address) {
     }
 }
 
-// tests if credit card number is valid
+// tests if credit card number is valid and displays errors if it is not
 function validateNum(num) {
     $("label[for='numError']").remove();
     if (num === "") {
@@ -56,7 +56,7 @@ function validateNum(num) {
     }
 }
 
-// tests if zip code is valid
+// tests if zip code is valid and displays errors if it is not
 function validateZip(zip) {
     $("label[for='zipError']").remove();
     if ((!$.isNumeric(zip)) || (zip.length !== 5)) {
@@ -69,7 +69,7 @@ function validateZip(zip) {
     }
 }
 
-// tests if cvv number is valid
+// tests if cvv number is valid and displays errors if it is not
 function validateCVV(cvv) {
     $("label[for='cvvError']").remove();
     if ((!$.isNumeric(cvv)) || (cvv.length !== 3)) {
@@ -82,39 +82,39 @@ function validateCVV(cvv) {
     }
 }
 
-// creates and appends and error message for invalid submissions
+// creates and appends an error message for invalid submissions
 function errorMessage(loc, className, msg) {
     loc.append(`<label for="${className}">${msg}</label>`);
     $(`label[for="${className}"]`).css("backgroundColor", "red").fadeOut(8000);
 }
 
 // real-time validation for name address
-$("#name").keyup(function () {
+$("#name").keyup(() => {
     validateName($("#name").val());
 });
 
 // real-time validation for email address
-$("#mail").keyup(function () {
+$("#mail").keyup(() => {
     validateEmail($("#mail").val());
 });
 
 // real-time validation for credit card number
-$("#cc-num").keyup(function () {
+$("#cc-num").keyup(() => {
     validateNum($("#cc-num").val());
 });
 
 // real-time validation for zip code
-$("#zip").keyup(function () {
+$("#zip").keyup(() => {
     validateZip($("#zip").val());
 });
 
 // real-time validation for cvv number
-$("#cvv").keyup(function () {
+$("#cvv").keyup(() => {
     validateCVV($("#cvv").val());
 });
 
 // shows text input if the user selects "other" from the Job Role dropdown
-$("#title").change(function () {
+$("#title").change(() => {
     if ($("#title").val() === "other") {
         $("#other-title").show().focus();
     } else {
@@ -122,8 +122,8 @@ $("#title").change(function () {
     }
 });
 
-// shows appropriate color choices based on which design in selected and hides unavailable color choices
-$($("#design")).change(function () {
+// shows appropriate color choices based on which design is selected and hides other color options
+$($("#design")).change(() => {
     const $jsPuns = $(".jsPuns");
     const $heartJS = $(".heartJS");
     const $selectColor = $(".selectColor");
@@ -144,7 +144,7 @@ $($("#design")).change(function () {
 });
 
 // listens for changes in the activities fieldset
-$($activities).change(function () {
+$($activities).change(() => {
     let totalCost = 0;
 
     // calculates current user total and adds it to a div
@@ -201,7 +201,7 @@ $($activities).change(function () {
 });
 
 // shows the appropriate payment info based on which option is selected and hides other payment info
-$($("#payment")).change(function () {
+$($("#payment")).change(() => {
     $("#credit-card").hide();
     $("#paypal").hide();
     $("#bitcoin").hide();
@@ -219,7 +219,7 @@ $($("#payment")).change(function () {
 });
 
 // validates user inputs when register button is clicked
-$($("[type='submit']")).click(function (submit) {
+$($("[type='submit']")).click((submit) => {
     if (validName === false) {
         submit.preventDefault();
         validateName($("#name").val());
