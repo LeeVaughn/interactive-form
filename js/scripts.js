@@ -38,23 +38,47 @@ function validateNum(num) {
     $("label[for='numError']").remove();
     if (num === "") {
         validNum = false;
+        console.log("if1");
         $("label[for='cc-num']").focus().css("color", "red");
         errorMessage($("label[for='cc-num']"), "numError", "Please enter a credit card number.")
-    }
-    if (!$.isNumeric(num) && (num.length > 0)) {
+    } else if (!$.isNumeric(num) && (num.length > 0)) {
         validNum = false;
+        console.log("if2");
         $("label[for='cc-num']").focus().css("color", "red");
         errorMessage($("label[for='cc-num']"), "numError", "Should contain only numbers.")
-    }
-    if (($.isNumeric(num)) && (num.length < 13) || (num.length > 16)) {
+    } else if (($.isNumeric(num)) && (num.length < 13) || (num.length > 16)) {
         validNum = false;
+        console.log("if3");
         $("label[for='cc-num']").focus().css("color", "red");
         errorMessage($("label[for='cc-num']"), "numError", "Should be between 13 and 16 digits.")
-    }
-    else {
+    } else {
         validNum = true;
+        console.log("else");
         $("label[for='cc-num']").css("color", "black");
     }
+}
+
+// tests if zip code is valid
+function validateZip(zip) {
+    // $("label[for='numError']").remove();
+    // if (zip === "") {
+    //     validNum = false;
+    //     $("label[for='cc-num']").focus().css("color", "red");
+    //     errorMessage($("label[for='cc-num']"), "numError", "Please enter a credit card number.")
+    // }
+    // if (!$.isNumeric(zip) && (zip.length > 0)) {
+    //     validNum = false;
+    //     $("label[for='cc-num']").focus().css("color", "red");
+    //     errorMessage($("label[for='cc-num']"), "numError", "Should contain only numbers.")
+    // }
+    // if (($.isNumeric(num)) && (num.length < 13) || (num.length > 16)) {
+    //     validNum = false;
+    //     $("label[for='cc-num']").focus().css("color", "red");
+    //     errorMessage($("label[for='cc-num']"), "numError", "Should be between 13 and 16 digits.")
+    // }
+    // else {
+    //     $("label[for='cc-num']").css("color", "black");
+    // }
 }
 
 // creates and appends and error message for invalid submissions
@@ -206,7 +230,6 @@ $($("[type='submit']")).click(function (submit) {
     }
     if ($("[value='credit card']").is(":selected")) {
         if (validNum === false) {
-            console.log("false");
             submit.preventDefault();
             validateNum($("#cc-num").val());
         }
