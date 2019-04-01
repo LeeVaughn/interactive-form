@@ -3,6 +3,7 @@ let validName = false;
 let validEmail = false;
 let validNum = false;
 let validZip = false;
+let validCVV = false;
 const $color = $("#colors-js-puns");
 const $activities = $(".activities");
 const $ccNum = $("#cc-num");
@@ -68,6 +69,19 @@ function validateZip(zip) {
     }
 }
 
+// tests if cvv number is valid
+function validateCVV(cvv) {
+    $("label[for='cvvError']").remove();
+    if ((!$.isNumeric(cvv)) || (cvv.length !== 3)) {
+        validCVV = false;
+        $("label[for='cvv']").focus().css("color", "red");
+        errorMessage($("label[for='cvv']"), "cvvError", "Invalid CVV Code");
+    } else {
+        validCVV = true;
+        $("label[for='cvv']").css("color", "black");
+    }
+}
+
 // creates and appends and error message for invalid submissions
 function errorMessage(loc, className, msg) {
     loc.append(`<label for="${className}">${msg}</label>`);
@@ -92,6 +106,11 @@ $("#cc-num").keyup(function () {
 // real-time validation for zip code
 $("#zip").keyup(function () {
     validateZip($("#zip").val());
+});
+
+// real-time validation for cvv number
+$("#cvv").keyup(function () {
+    validateCVV($("#cvv").val());
 });
 
 // shows text input if the user selects "other" from the Job Role dropdown
@@ -229,12 +248,9 @@ $($("[type='submit']")).click(function (submit) {
             submit.preventDefault();
             validateZip($("#zip").val());
         }
-        if ((!$.isNumeric($("#cvv").val())) || ($("#cvv").val().length !== 3)) {
+        if (validCVV === false) {
             submit.preventDefault();
-            $("label[for='cvv']").focus().css("color", "red");
-            errorMessage($("label[for='cvv']"), "cvvError", "Invalid CVV Code");
-        } else {
-            $("label[for='cvv']").css("color", "black");
+            validateCVV($("#cvv").val());
         }
     }
 });
@@ -250,7 +266,7 @@ $color.hide()
 $("#paypal").hide();
 $("#bitcoin").hide();
 
-// sets credit card as the default payment & puts focus on card number field
+// sets credit card as the default payment
 $("[value='credit card']").prop("selected", true);
 
 // will be used to display activity total
