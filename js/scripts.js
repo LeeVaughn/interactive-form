@@ -2,6 +2,7 @@ const $name = $("label[for='name']");
 let validName = false;
 let validEmail = false;
 let validNum = false;
+let validZip = false;
 const $color = $("#colors-js-puns");
 const $activities = $(".activities");
 const $ccNum = $("#cc-num");
@@ -38,47 +39,33 @@ function validateNum(num) {
     $("label[for='numError']").remove();
     if (num === "") {
         validNum = false;
-        console.log("if1");
         $("label[for='cc-num']").focus().css("color", "red");
         errorMessage($("label[for='cc-num']"), "numError", "Please enter a credit card number.")
     } else if (!$.isNumeric(num) && (num.length > 0)) {
         validNum = false;
-        console.log("if2");
         $("label[for='cc-num']").focus().css("color", "red");
         errorMessage($("label[for='cc-num']"), "numError", "Should contain only numbers.")
     } else if (($.isNumeric(num)) && (num.length < 13) || (num.length > 16)) {
         validNum = false;
-        console.log("if3");
         $("label[for='cc-num']").focus().css("color", "red");
         errorMessage($("label[for='cc-num']"), "numError", "Should be between 13 and 16 digits.")
     } else {
         validNum = true;
-        console.log("else");
         $("label[for='cc-num']").css("color", "black");
     }
 }
 
 // tests if zip code is valid
 function validateZip(zip) {
-    // $("label[for='numError']").remove();
-    // if (zip === "") {
-    //     validNum = false;
-    //     $("label[for='cc-num']").focus().css("color", "red");
-    //     errorMessage($("label[for='cc-num']"), "numError", "Please enter a credit card number.")
-    // }
-    // if (!$.isNumeric(zip) && (zip.length > 0)) {
-    //     validNum = false;
-    //     $("label[for='cc-num']").focus().css("color", "red");
-    //     errorMessage($("label[for='cc-num']"), "numError", "Should contain only numbers.")
-    // }
-    // if (($.isNumeric(num)) && (num.length < 13) || (num.length > 16)) {
-    //     validNum = false;
-    //     $("label[for='cc-num']").focus().css("color", "red");
-    //     errorMessage($("label[for='cc-num']"), "numError", "Should be between 13 and 16 digits.")
-    // }
-    // else {
-    //     $("label[for='cc-num']").css("color", "black");
-    // }
+    $("label[for='zipError']").remove();
+    if ((!$.isNumeric(zip)) || (zip.length !== 5)) {
+        validZip = false;
+        $("label[for='zip']").focus().css("color", "red");
+        errorMessage($("label[for='zip']"), "zipError", "Invalid Zip Code");
+    } else {
+        validZip = true;
+        $("label[for='zip']").css("color", "black");
+    }
 }
 
 // creates and appends and error message for invalid submissions
@@ -100,6 +87,11 @@ $("#mail").keyup(function () {
 // real-time validation for credit card number
 $("#cc-num").keyup(function () {
     validateNum($("#cc-num").val());
+});
+
+// real-time validation for zip code
+$("#zip").keyup(function () {
+    validateZip($("#zip").val());
 });
 
 // shows text input if the user selects "other" from the Job Role dropdown
@@ -233,12 +225,9 @@ $($("[type='submit']")).click(function (submit) {
             submit.preventDefault();
             validateNum($("#cc-num").val());
         }
-        if ((!$.isNumeric($("#zip").val())) || ($("#zip").val().length !== 5)) {
+        if (validZip === false) {
             submit.preventDefault();
-            $("label[for='zip']").focus().css("color", "red");
-            errorMessage($("label[for='zip']"), "zipError", "Invalid Zip Code");
-        } else {
-            $("label[for='zip']").css("color", "black");
+            validateZip($("#zip").val());
         }
         if ((!$.isNumeric($("#cvv").val())) || ($("#cvv").val().length !== 3)) {
             submit.preventDefault();
