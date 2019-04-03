@@ -8,7 +8,10 @@ const $color = $("#colors-js-puns");
 const $activities = $(".activities");
 const $ccNum = $("#cc-num");
 
-// tests if name is valid and displays errors if it is not
+/**
+ * tests if name is valid and displays errors if it is not
+ * @param (string) name - value of name input
+ */
 function validateName(name) {
     if (name === "") {
         validName = false;
@@ -20,12 +23,15 @@ function validateName(name) {
     }
 }
 
-// tests if email is valid and displays errors if it is not
-function validateEmail(address) {
+/**
+ * tests if email is valid and displays errors if it is not
+ * @param (string) email - value of email input
+ */
+function validateEmail(email) {
     const $mail = $("label[for='mail']");
     const filter = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     $("label[for='mailError']").remove();
-    if (filter.test(address) === false) {
+    if (filter.test(email) === false) {
         validEmail = false;
         $mail.focus().css("color", "red");
         errorMessage($mail, "mailError", "Please enter a valid email address.");
@@ -35,7 +41,10 @@ function validateEmail(address) {
     }
 }
 
-// tests if credit card number is valid and displays errors if it is not
+/**
+ * tests if credit card number is valid and displays errors if it is not
+ * @param (string) num - value of credit card input
+ */
 function validateNum(num) {
     $("label[for='numError']").remove();
     if (num === "") {
@@ -56,7 +65,10 @@ function validateNum(num) {
     }
 }
 
-// tests if zip code is valid and displays errors if it is not
+/**
+ * tests if zip code is valid and displays errors if it is not
+ * @param (string) zip - value of zip code input
+ */
 function validateZip(zip) {
     $("label[for='zipError']").remove();
     if ((!$.isNumeric(zip)) || (zip.length !== 5)) {
@@ -69,7 +81,10 @@ function validateZip(zip) {
     }
 }
 
-// tests if cvv number is valid and displays errors if it is not
+/**
+ * tests if cvv number is valid and displays errors if it is not
+ * @param (string) cvv - value of cvv input
+ */
 function validateCVV(cvv) {
     $("label[for='cvvError']").remove();
     if ((!$.isNumeric(cvv)) || (cvv.length !== 3)) {
@@ -82,7 +97,12 @@ function validateCVV(cvv) {
     }
 }
 
-// creates and appends an error message for invalid submissions
+/**
+ * creates and appends an error message for invalid submissions
+ * @param (object) loc - location to append error message
+ * @param (string) className - class name to add to error message
+ * @param (string) msg - error message to display
+ */
 function errorMessage(loc, className, msg) {
     loc.append(`<label for="${className}">${msg}</label>`);
     $(`label[for="${className}"]`).css("backgroundColor", "red").fadeOut(8000);
