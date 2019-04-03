@@ -16,8 +16,7 @@ This project was created as part of the Full Stack JavaScript Techdegree at Tree
 * All form fields and payment information is displayed with JavaScript is disabled.
 
 ## Future Improvements
-* Add more real-time error detection for required fields.
-* Add validation to shirt selection section.
+* Streamline functionality in the activities change listener
 
 ## Links
 * Project homepage: https://leevaughn.github.io/interactive-form/
